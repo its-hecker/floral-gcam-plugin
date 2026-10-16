@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: Apache-2.0
+soong_namespace {}
+
+package {
+    default_applicable_licenses: ["floral_gcam_source_license"],
+}
+
+license {
+    name: "floral_gcam_source_license",
+    license_kinds: ["SPDX-license-identifier-Apache-2.0"],
+    license_text: ["LICENSE"],
+}
+
+license {
+    name: "floral_gcam_apk_license",
+    license_kinds: ["legacy_proprietary"],
+    license_text: ["NOTICE"],
+}
+
+genrule {
+    name: "floral_gcam_apk_set",
+    licenses: ["floral_gcam_apk_license"],
+    srcs: [
+        "proprietary/GoogleCameraCoral.apks.00",
+        "proprietary/GoogleCameraCoral.apks.01",
+        "proprietary/GoogleCameraCoral.apks.02",
+    ],
+    out: ["FloralGoogleCamera.apks"],
+    cmd: "cat $(in) > $(out)",
+}
+
+android_app_set {
+    name: "FloralGoogleCamera",
+    licenses: ["floral_gcam_apk_license"],
+    owner: "google",
+    set: ":floral_gcam_apk_set",
+    product_specific: true,
+    overrides: @OVERRIDES@,
+}

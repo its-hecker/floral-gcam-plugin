@@ -1,0 +1,54 @@
+name: Check Floral GCam plugin
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check policy selection, cache integrity and product bootstrap
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Check Python and documented Bash syntax
+        run: |
+          python3 -m compileall -q tools tests
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+          for block in re.findall(r"\x60\x60\x60bash\n(.*?)\n\x60\x60\x60", Path("README.md").read_text(), re.S):
+              subprocess.run(["bash", "-n"], input=block, text=True, check=True)
+          PY
+  payload:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Fetch and verify immutable Camera chunks
+        run: python3 tools/fetch_prebuilts.py
+      - name: Prepare Android signature and manifest tools
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'build-tools;35.0.0'
+      - name: Verify all original Google APKs and required splits
+        run: |
+          python3 tools/verify_payload.py \
+            --aapt2 "$ANDROID_HOME/build-tools/35.0.0/aapt2" \
+            --apksigner "$ANDROID_HOME/build-tools/35.0.0/apksigner"
+      - name: Prepare against the tested vendor and active Camera policy
+        run: python3 tests/check_reference.py
+      - name: Ensure validation did not change tracked source
+        run: git diff --exit-code

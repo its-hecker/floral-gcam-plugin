@@ -1,0 +1,5 @@
+/proprietary/
+/generated/
+/Android.bp
+__pycache__/
+*.pyc

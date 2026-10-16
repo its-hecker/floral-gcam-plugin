@@ -1,0 +1,22 @@
+Floral GCam build integration
+Maintainer: Hecker (https://github.com/its-hecker)
+
+Original integration and standalone packaging: its-hecker.
+The Python APK-set verifier retains the tested Coral importer's verification
+and AOSP extract_apks table-of-contents encoding.
+
+The integration source is licensed under Apache-2.0; see LICENSE.
+Google Camera, Pixel Camera Services and the stock Floral vendor components
+remain proprietary Google software. No license to Google's APKs is granted
+by the integration source license. No Google APK is modified or re-signed.
+
+The fetched Camera base and nine feature splits are pinned to:
+its-hecker/infinity_cnb_proprietary_vendor_google_coral
+commit d1409c6066f977639a99d276709e3a70e7a9b3c0, camera/prebuilt/
+The original release and every APK fingerprint are in provenance/source.json.
+The tested archive layout and chunk fingerprints are in provenance/payload.json.
+The public certificate is extracted from the original Google-signed APK;
+only that package receives a signer mapping when the base has none.
+
+Underlying platform integration: AOSP / LineageOS / Project Infinity X.
+This is an independent Floral ROM build integration, not an official Google product.

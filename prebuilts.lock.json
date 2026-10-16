@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "package": "com.google.android.GoogleCamera",
+  "version_name": "8.7.250.494820638.44",
+  "version_code": 65822832,
+  "signer_sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+  "artifacts": [
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "d1409c6066f977639a99d276709e3a70e7a9b3c0",
+      "path": "camera/prebuilt/GoogleCameraCoral.apks.00",
+      "destination": "proprietary/GoogleCameraCoral.apks.00",
+      "size": 67108864,
+      "sha256": "41691074ffafbcd447ae55fccced41abd4dfd6f2f7ff2d0b0a3d1c7d20b443e5"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "d1409c6066f977639a99d276709e3a70e7a9b3c0",
+      "path": "camera/prebuilt/GoogleCameraCoral.apks.01",
+      "destination": "proprietary/GoogleCameraCoral.apks.01",
+      "size": 67108864,
+      "sha256": "bcd1a737292b12ca8286163753cfdf96e6a675878e3c28e71075ca11ec6bf55a"
+    },
+    {
+      "repository": "its-hecker/infinity_cnb_proprietary_vendor_google_coral",
+      "revision": "d1409c6066f977639a99d276709e3a70e7a9b3c0",
+      "path": "camera/prebuilt/GoogleCameraCoral.apks.02",
+      "destination": "proprietary/GoogleCameraCoral.apks.02",
+      "size": 39864603,
+      "sha256": "0af48cc831cc2bf71d708eeac44534732e6d4d395c29dc611c5090fcc7f91ad2"
+    }
+  ]
+}
